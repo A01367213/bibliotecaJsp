@@ -1,0 +1,110 @@
+
+<script language=javascript>
+
+	var xhr;
+	
+	
+	function obtenerResultadoJson()
+	{	
+		var libros;
+		var datos="";
+		
+		if(xhr.readyState == 4)
+		{
+			//document.getElementById("transaccion").innerHTML = xhr.responseText;
+			
+			clientes = eval("("+xhr.responseText+")");
+			//clientes = JSON.parse(xhr.responseText);
+			
+			document.getElementById("transaccion").innerHTML = xhr.responseText;
+			//document.getElementById("transaccion").innerHTML = clientes;
+			
+			/*datos = "<table border=1>";
+			for(i=0; i<clientes.length; i++)
+			{
+				//datos = datos + clientes[i].nocta+"   "+clientes[i].nombre+"   "+clientes[i].nombre+"   "+clientes[i].saldo+"<br/>";
+				datos = datos +"<tr><td>"+clientes[i].nocta+"</td><td>"+clientes[i].nombre+"</td><td>"+clientes[i].nombre+"</td><td>"+clientes[i].saldo+"</td></tr>";
+			}
+			datos = datos + "</table>";
+			
+			document.getElementById("transaccion").innerHTML = datos;
+			*/
+		}
+	}
+	
+	function establecerConexionConsultar(urlString)
+	{
+		xhr.open("get",urlString,true);
+		//xhr.onreadystatechange=obtenerResultado;
+		xhr.onreadystatechange=obtenerResultadoJson;
+		xhr.send(null);
+	}
+	
+	function obtenerResultado()
+	{	
+		if(xhr.readyState == 4)
+		{
+			document.getElementById("transaccion").innerHTML = xhr.responseText;
+		}
+	}
+	
+	function establecerConexion(urlString)
+	{
+		xhr.open("get",urlString,true);
+		xhr.onreadystatechange=obtenerResultado;
+		xhr.send(null);
+	}
+	
+	function consultarTipo()
+	{
+		// 1. Obtener el valor del Tipo de Cuenta del TextField correspondiente
+		var tcta = document.getElementById("tipo").value;
+		
+		// 2. Preparar el URL String
+		var urlString = "../bancoJsp/Cliente.jsp?bConsultarTipo=consultar&tipo="+tcta;
+		
+		// 3. Crear el objeto de conexion
+		xhr = new XMLHttpRequest();
+		
+		// 4. Establecer conexion y ejecutar transaccion
+		establecerConexion(urlString);
+	}
+	
+	function consultar()
+	{
+		
+		// 1. Preparar el URL String
+		var urlString = "../bancoJsp/Cliente.jsp?bConsultar=consultar";
+		
+		// 1. Crear el objeto de conexion
+		xhr = new XMLHttpRequest();
+		
+		// 3. Establecer conexion y ejecutar transaccion
+		establecerConexionConsultar(urlString);
+	}
+
+</script>
+
+<html>
+	<head><title>Apache y CGIs</title></head>
+	<body>
+		<h2>Banco IoT</h2>
+		<!--<form action='../cgi-bin/ClienteController.py' method='get'>-->
+		<!--<form action='../banco/banco' method='get'>-->
+		<form action='../bancoJsp/Cliente.jsp' method='get'>
+			NO. CUENTA:  <input type='text' name='nocta' id='nocta'  value=""><br/>
+			NOMBRE:      <input type='text' name='nombre'id='nombre' value=''><br/>
+			TIPO CUENTA: <input type='text' name='tipo'  id='tipo'   value=""><br/>
+			SALDO:       <input type='text' name='saldo' id='saldo'  value=''><br/><br/>
+					     <input type='submit' name='bCapturar' value='Capturar datos'>
+					     <input type='submit' name='bConsultar' value='Consultar clientes'>
+					     <input type='submit' name='bConsultarNCta' value='Consultar No Cuenta'>
+					     <input type='submit' name='bConsultarTipo' value='Consultar Tipo Cuenta'><br/>
+					     <input type='button' name='bConsultarJson'     id='bConsultarJson'     value='Consultar Clientes JSON'    onclick='consultar()'>
+					     <input type='button' name='bConsultarTipoJson' id='bConsultarTipoJson' value='Consultar Tipo Cuenta JSON' onclick='consultarTipo()'>
+
+		</form>
+		<br/><br/>
+        	Transaccion: <div id='transaccion'></div>
+	</body>
+</html>

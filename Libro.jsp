@@ -12,26 +12,55 @@
 
 
 <html>
-	<head>
-		<title>Apache y Jsps</title>
-		<!--link rel="stylesheet" type="text/css" href="../bancojsp/styles/styles.css"-->
-	</head>
-	<body>
-		<h2>La Bilio</h2>
-		<!--form action='../cgi-bin/ClienteController.py' method='get'-->
-		<!--form action='../banco/banco' method='get'-->
-		<form action='../bibliotecaJsp/Libro.jsp' method='get'>
-			
-			TITULO:    <input type='text' name='titulo' value=''><br/>
-        	AUTOR:     <input type='text' name='autor' value=''><br/>
-        	EDITORIAL: <input type='text' name='editorial' value=''><br/>
-							<input type='submit' name='bCapturar' value='Capturar Datos'>
-							<input type='submit' name='bConsultar' value='Consultar Libros'>
-							<input type='submit' name='bConsultarEdit' value='Consultar Editorial'>
-							<input type='submit' name='bConsultarTitulo' value='Consultar Titulo'>
-		</form>
-		<!--image align='center' alt='IMAGEN' src='../bancojsp/images/nino.jpg'></image-->
-	</body>
+  <head>
+    <title>Apache y Servlet</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/funciones.js"></script>
+</head>
+    <body style="background-image: url('resources/images/cardinal.jpg')">
+        <h1>LaBiblio</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <form action='../bibliotecaJsp/Libro.jsp' method='get' style="height: 40%; flex-direction: unset; border-radius: 30px;">
+            <table>
+                <tr>
+                    <td>TITULO: </td>
+                    <td colspan="3"><input type='text' name='titulo' id='titulo' value=''><br/></td>
+                </tr>
+                <tr>
+                    <td>AUTOR: </td>
+                    <td colspan="3"><input type='text' name='autor' id="autor" value=''><br/></td>
+                </tr>
+                <tr>
+                    <td>EDITORIAL: </td>
+                    <td colspan="3"><input type='text' name='editorial' id="editorial" value=''><br/></td>
+                </tr>
+                <tr>
+                    <td><input type='submit' name='bCapturar' value='Capturar Datos'></td>
+                    <td><input type='submit' name='bConsultar' value='Consultar Libros'></td>
+                    <td><input type='submit' name='bConsultarEdit' value='Consultar Editorial'></td>
+                    <td><input type='submit' name='bConsultarTitulo' value='Consultar Titulo'></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type='button' name='bConsultarJson'     id='bConsultarJson'     value='Consultar Libros JSON'    onclick='consultar()'></td>
+                    <td colspan="2"><input type='button' name='bConsultarEditJson' id='bConsultarEditJson' value='Consultar Editorial JSON' onclick='consultarEdit()'></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><input type='button' name='bConsultarTitJson' id='bConsultarTitJson' value='Consultar Título JSON' onclick='consultarTit()'></td>
+                </tr>
+
+            </table>  
+            <br/><br/>            
+        </form>
+        <h1>Resultados:</h1>
+        <div id='operacion'></div>
+    </body>
 </html>
 <%
 	}

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\..\\apache-tomcat-8.5.64\\webapps\\bancojsp"
+		},
+		{
+			"path": "..\\..\\..\\..\\apache-tomcat-8.5.64\\webapps\\biblioteca"
+		},
+		{
+			"path": "..\\..\\..\\..\\apache-tomcat-8.5.64\\webapps\\bibliotecaJsp"
+		}
+	],
+	"settings": {}
+}
